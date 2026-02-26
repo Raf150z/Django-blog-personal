@@ -1,0 +1,73 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ post.titulo }} - Mi Blog{% endblock %}
+
+{% block extra_css %}
+<style>
+    .post-detail {
+        background: white;
+        border-radius: 8px;
+        padding: 3rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .post-detail h1 {
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+    }
+    
+    .post-meta {
+        color: #7f8c8d;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #ecf0f1;
+        padding-bottom: 1rem;
+    }
+    
+    .post-content {
+        line-height: 1.8;
+        font-size: 1.1rem;
+    }
+    
+    .post-content p {
+        margin-bottom: 1.5rem;
+    }
+    
+    .back-link {
+        display: inline-block;
+        margin-top: 2rem;
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .back-link:hover {
+        text-decoration: underline;
+    }
+    
+    .post-footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid #ecf0f1;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <article class="post-detail">
+        <h1>{{ post.titulo }}</h1>
+        <div class="post-meta">
+            Publicado por {{ post.autor.username }} | {{ post.fecha_publicacion|date:"l, d F Y H:i" }}
+        </div>
+        
+        <div class="post-content">
+            {{ post.contenido|linebreaks }}
+        </div>
+        
+        <div class="post-footer">
+            <a href="{% url 'blog:post_list' %}" class="back-link">← Volver al inicio</a>
+        </div>
+    </article>
+{% endblock %}
